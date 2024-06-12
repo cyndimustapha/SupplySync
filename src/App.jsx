@@ -1,10 +1,13 @@
-import Navigationbar from "./components/Navbar"
+import LoginPage from "./Pages/LoginPage"
+import Dashboard from "./Pages/Dashboard"
 
 function App() {
   
   return (
     <>
-      <Navigationbar />
+      <LoginPage />
+      <Dashboard />
+
       
     </>
   )
