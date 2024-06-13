@@ -8,7 +8,7 @@ function Sidebar() {
     <Nav className="col-md-12 d-none d-md-block bg-light sidebar">
       <div className="sidebar-sticky"></div>
       <Nav.Item>
-        <Nav.Link as={Link} to="/home">Dashboard</Nav.Link>
+        <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link as={Link} to="/products">Products</Nav.Link>
