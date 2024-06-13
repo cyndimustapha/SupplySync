@@ -18,7 +18,7 @@ function Login() {
     // simulate successful login
     if (email === 'admin@example.com' && password === 'password') {
       localStorage.setItem('token', 'your-token'); // Simulate token
-      navigate('/home');
+      navigate('/dashboard');
     } else {
       setError('Invalid email or password');
     }

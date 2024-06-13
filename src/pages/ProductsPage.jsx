@@ -2,7 +2,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import Products from '../components/Products';
+import Product from '../components/Product';
 
 function ProductsPage() {
   return (
@@ -12,7 +12,7 @@ function ProductsPage() {
         <div className="row">
           <Sidebar />
           <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <Products />
+            <Product />
           </main>
         </div>
       </div>
