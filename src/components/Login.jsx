@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
@@ -14,14 +13,26 @@ function Login() {
     e.preventDefault();
     setError('');
 
-    // Assuming a function to authenticate user exists
-    // simulate successful login
-    if (email === 'admin@example.com' && password === 'password') {
-      localStorage.setItem('token', 'your-token'); // Simulate token
-      navigate('/dashboard');
-    } else {
-      setError('Invalid email or password');
-    }
+    fetch('http://localhost:8000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          navigate('/dashboard');
+        } else {
+          setError('Invalid email or password');
+        }
+      })
+      .catch(error => {
+        setError('Error logging in');
+        console.error('Error:', error);
+      });
   }
 
   return (
