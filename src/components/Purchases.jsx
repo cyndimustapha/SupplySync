@@ -6,7 +6,7 @@ function Purchases() {
 
   useEffect(() => {
     // Fetch purchases from API
-    fetch('http://localhost:8000/purchases')
+    fetch('http://127.0.0.1:8000/purchases')
       .then(response => response.json())
       .then(data => setPurchases(data))
       .catch(error => console.error('Error fetching purchases:', error));

@@ -26,7 +26,7 @@ function Registration() {
       city,
     };
 
-    fetch('http://localhost:8000/users', {
+    fetch('http://127.0.0.1:8000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function Registration() {
       .then((data) => {
         setSuccess('Registration successful');
         // Redirect to login page or dashboard after successful registration
-        navigate('/loginpage');
+        navigate('/');
       })
       .catch((error) => {
         setError('Registration failed: ' + error.message);

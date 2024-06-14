@@ -6,7 +6,7 @@ function Transactions() {
 
   useEffect(() => {
     // Fetch transactions from API
-    fetch('http://localhost:8000/transactions')
+    fetch('http://127.0.0.1:8000/transactions')
       .then(response => response.json())
       .then(data => setTransactions(data))
       .catch(error => console.error('Error fetching transactions:', error));

@@ -6,7 +6,7 @@ function Products() {
 
   useEffect(() => {
     // Fetch products from API
-    fetch('http://localhost:8000/products')
+    fetch('http://127.0.0.1:8000/products')
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching products:', error));

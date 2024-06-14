@@ -6,7 +6,7 @@ function Sales() {
 
   useEffect(() => {
     // Fetch sales from API
-    fetch('http://localhost:8000/sales')
+    fetch('http://127.0.0.1:8000/sales')
       .then(response => response.json())
       .then(data => setSales(data))
       .catch(error => console.error('Error fetching sales:', error));
