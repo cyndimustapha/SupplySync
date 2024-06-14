@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     setError('');
 
-    fetch('http://localhost:8000/login', {
+    fetch('http://localhost:8000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

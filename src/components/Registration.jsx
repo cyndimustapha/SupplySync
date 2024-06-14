@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +18,7 @@ function Registration() {
     setError('');
     setSuccess('');
 
-    const registrationData = {
+    const userData = {
       email,
       password,
       companyName,
@@ -25,12 +26,12 @@ function Registration() {
       city,
     };
 
-    fetch('http://localhost:8000/register', {
+    fetch('http://localhost:8000/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(registrationData),
+      body: JSON.stringify(userData),
     })
       .then((response) => {
         if (response.ok) {
@@ -42,7 +43,7 @@ function Registration() {
       .then((data) => {
         setSuccess('Registration successful');
         // Redirect to login page or dashboard after successful registration
-        navigate('/dashboard');
+        navigate('/loginpage');
       })
       .catch((error) => {
         setError('Registration failed: ' + error.message);
