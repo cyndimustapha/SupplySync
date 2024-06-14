@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     setError('');
 
-    fetch('http://127.0.0.1:8000/users', {
+    fetch('http://127.0.0.1:8000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,8 +22,7 @@ function Login() {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
+        if (data.message === "Login successful") {
           navigate('/dashboard');
         } else {
           setError('Invalid email or password');
