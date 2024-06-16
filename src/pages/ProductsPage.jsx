@@ -2,19 +2,40 @@
 import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import Product from '../components/Products';
+import ProductList from '../components/ProductList';
 
 function ProductsPage() {
+  //styling
+  const containerStyle = {
+    display: 'flex',
+  };
+
+  const sidebarStyle = {
+    width: '250px', // Fixed width for the sidebar
+    minWidth: '250px',
+    backgroundColor: '#f8f9fa', // Light background color for the sidebar
+  };
+
+  const mainContentStyle = {
+    flexGrow: 1, // Takes the remaining width
+    padding: '1rem',
+  };
+
+  const Add = () => {
+
+
+  }
+
   return (
     <>
       <Header />
-      <div className="container-fluid">
-        <div className="row">
+      <div style={containerStyle}>
+        <div style={sidebarStyle}>
           <Sidebar />
-          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <Product />
-          </main>
         </div>
+        <main role="main" style={mainContentStyle}>
+          <ProductList />
+        </main>
       </div>
     </>
   );

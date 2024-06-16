@@ -2,19 +2,34 @@
 import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import Transactions from '../components/Transactions';
+import TransactionList from '../components/TransactionList';
 
 function TransactionsPage() {
+  const containerStyle = {
+    display: 'flex',
+  };
+
+  const sidebarStyle = {
+    width: '250px',
+    minWidth: '250px',
+    backgroundColor: '#f8f9fa',
+  };
+
+  const mainContentStyle = {
+    flexGrow: 1,
+    padding: '1rem',
+  };
+
   return (
     <>
       <Header />
-      <div className="container-fluid">
-        <div className="row">
+      <div style={containerStyle}>
+        <div style={sidebarStyle}>
           <Sidebar />
-          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <Transactions />
-          </main>
         </div>
+        <main role="main" style={mainContentStyle}>
+          <TransactionList />
+        </main>
       </div>
     </>
   );

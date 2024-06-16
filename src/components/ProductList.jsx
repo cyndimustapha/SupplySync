@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
+import ProductForm from './ProductForm';
 
-function Products() {
+function ProductList() {
   const [products, setProducts] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     // Fetch products from API
@@ -15,7 +17,8 @@ function Products() {
   return (
     <div>
       <h2>Products</h2>
-      <Button variant="primary" className="mb-3">Add Product</Button>
+      <Button variant="primary" className="mb-3" onClick={() => setShowForm(true)}>Add Product</Button>
+      {showForm && <ProductForm onClose={() => setShowForm(false)} />} {/* Render form conditionally */}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -48,4 +51,4 @@ function Products() {
 }
 
 
-export default Products;
+export default ProductList;

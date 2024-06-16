@@ -14,6 +14,7 @@ function Routing() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/transactions" element={<TransactionsPage />} />
+        
       </Routes>
     </BrowserRouter>
   );

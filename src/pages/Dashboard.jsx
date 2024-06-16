@@ -2,20 +2,36 @@
 import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import Product from '../components/Products';
 
 function Dashboard() {
+  //styling
+  const containerStyle = {
+    display: 'flex',
+  };
+
+  const sidebarStyle = {
+    width: '250px', // Fixed width for the sidebar
+    minWidth: '250px',
+    backgroundColor: '#f8f9fa', // Light background color for the sidebar
+  };
+
+  const mainContentStyle = {
+    flexGrow: 1, // Takes the remaining width
+    padding: '1rem',
+    fontFamily: 'Times New Roman, Times, serif',
+    
+  };
+
   return (
     <>
       <Header />
-      <div className="container-fluid">
-        <div className="row">
+      <div style={containerStyle}>
+        <div style={sidebarStyle}>
           <Sidebar />
-          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <h2>Dashboard</h2>
-            <Product />
-          </main>
         </div>
+        <main role="main" style={mainContentStyle}>
+          <h2>Dashboard</h2>
+        </main>
       </div>
     </>
   );

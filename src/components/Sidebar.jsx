@@ -16,12 +16,6 @@ function Sidebar() {
       <Nav.Item>
         <Nav.Link as={Link} to="/transactions">Transactions</Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link as={Link} to="/sales">Sales</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link as={Link} to="/purchases">Purchases</Nav.Link>
-      </Nav.Item>
     </Nav>
   );
 }
