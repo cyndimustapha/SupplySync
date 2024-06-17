@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 
-function ProductForm({ onClose }) {
+function ProductForm({ onClose, refreshProducts }) {
   const [name, setName] = useState('');
   const [sku, setSku] = useState('');
   const [description, setDescription] = useState('');
@@ -24,6 +24,7 @@ function ProductForm({ onClose }) {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        refreshProducts(); // Re-fetch products after adding a new one
         onClose(); // Close the form after submission
       })
       .catch(error => console.error('Error creating product:', error));
@@ -60,7 +61,7 @@ function ProductForm({ onClose }) {
             <Form.Label>Supplier</Form.Label>
             <Form.Control type="text" value={supplier} onChange={(e) => setSupplier(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" type="submit" onSubmit={handleSubmit}>Add Product</Button>
+          <Button variant="primary" type="submit">Add Product</Button>
         </Form>
       </Modal.Body>
     </Modal>

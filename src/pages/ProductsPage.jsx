@@ -1,40 +1,35 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import ProductList from '../components/ProductList';
+import ProductForm from '../components/ProductForm';
 
 function ProductsPage() {
-  //styling
-  const containerStyle = {
-    display: 'flex',
+  const [products, setProducts] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
+  const fetchProducts = () => {
+    fetch('http://127.0.0.1:8000/products')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error('Error fetching products:', error));
   };
 
-  const sidebarStyle = {
-    width: '250px', // Fixed width for the sidebar
-    minWidth: '250px',
-    backgroundColor: '#f8f9fa', // Light background color for the sidebar
-  };
-
-  const mainContentStyle = {
-    flexGrow: 1, // Takes the remaining width
-    padding: '1rem',
-  };
-
-  const Add = () => {
-
-
-  }
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <>
       <Header />
-      <div style={containerStyle}>
-        <div style={sidebarStyle}>
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '250px', minWidth: '250px', backgroundColor: '#f8f9fa' }}>
           <Sidebar />
         </div>
-        <main role="main" style={mainContentStyle}>
-          <ProductList />
+        <main role="main" style={{ flexGrow: 1, padding: '1rem' }}>
+          <ProductList products={products} onAddProductClick={() => setShowForm(true)} />
+          {showForm && <ProductForm onClose={() => setShowForm(false)} refreshProducts={fetchProducts} />}
         </main>
       </div>
     </>

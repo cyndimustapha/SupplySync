@@ -1,27 +1,11 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
 import { Table, Button } from 'react-bootstrap';
-import ProductForm from './ProductForm';
 
-function ProductList() {
-  const [products, setProducts] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-
-  const fetchProducts = () => {
-    fetch('http://127.0.0.1:8000/products')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-      .catch(error => console.error('Error fetching products:', error));
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
+function ProductList({ products, onAddProductClick }) {
   return (
     <div>
       <h2>Products</h2>
-      <Button variant="primary" className="mb-3" onClick={() => setShowForm(true)}>Add Product</Button>
-      {showForm && <ProductForm onClose={() => setShowForm(false)} />} {/* Render form conditionally */}
+      <Button variant="primary" className="mb-3" onClick={onAddProductClick}>Add Product</Button>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -55,6 +39,5 @@ function ProductList() {
     </div>
   );
 }
-
 
 export default ProductList;
