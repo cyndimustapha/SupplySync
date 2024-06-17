@@ -6,12 +6,15 @@ function ProductList() {
   const [products, setProducts] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
-  useEffect(() => {
-    // Fetch products from API
+  const fetchProducts = () => {
     fetch('http://127.0.0.1:8000/products')
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching products:', error));
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   return (
@@ -25,9 +28,10 @@ function ProductList() {
             <th>ID</th>
             <th>Name</th>
             <th>SKU</th>
+            <th>Description</th>
+            <th>Quantity</th>
             <th>Price</th>
-            <th>Stock</th>
-            <th>Actions</th>
+            <th>Supplier</th>
           </tr>
         </thead>
         <tbody>
@@ -36,8 +40,10 @@ function ProductList() {
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.sku}</td>
+              <td>{product.description}</td>
+              <td>{product.quantity}</td>
               <td>{product.price}</td>
-              <td>{product.stock}</td>
+              <td>{product.supplier}</td>
               <td>
                 <Button variant="warning" className="mr-2">Edit</Button>
                 <Button variant="danger">Delete</Button>

@@ -60,7 +60,7 @@ function ProductForm({ onClose }) {
             <Form.Label>Supplier</Form.Label>
             <Form.Control type="text" value={supplier} onChange={(e) => setSupplier(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" type="submit">Add Product</Button>
+          <Button variant="primary" type="submit" onSubmit={handleSubmit}>Add Product</Button>
         </Form>
       </Modal.Body>
     </Modal>
