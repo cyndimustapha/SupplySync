@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
+// TransactionForm.jsx
 import { useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 
-function TransactionForm({ onClose, refreshTransactions }) {
-  const [userId, setUserId] = useState("");
-  const [productId, setProductId] = useState("");
-  const [date, setDate] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [totalPrice, setTotalPrice] = useState("");
-  const [transactionType, setTransactionType] = useState("");
+function TransactionForm({
+  onClose,
+  refreshTransactions,
+  transactionToEdit,
+  isEditing,
+}) {
+  const [userId, setUserId] = useState(transactionToEdit? transactionToEdit.user_id : "");
+  const [productId, setProductId] = useState(transactionToEdit? transactionToEdit.product_id : "");
+  const [date, setDate] = useState(transactionToEdit? transactionToEdit.date : "");
+  const [quantity, setQuantity] = useState(transactionToEdit? transactionToEdit.quantity : "");
+  const [totalPrice, setTotalPrice] = useState(transactionToEdit? transactionToEdit.total_price : "");
+  const [transactionType, setTransactionType] = useState(transactionToEdit? transactionToEdit.type : "");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,26 +27,43 @@ function TransactionForm({ onClose, refreshTransactions }) {
       type: transactionType,
     };
 
-    fetch("http://127.0.0.1:8000/transactions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTransaction),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        refreshTransactions();
-        onClose(); // Close the form after submission
+    if (isEditing) {
+      fetch(`http://127.0.0.1:8000/transactions/${transactionToEdit.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTransaction),
       })
-      .catch((error) => console.error("Error creating transaction:", error));
+       .then((response) => response.json())
+       .then((data) => {
+          console.log(data);
+          refreshTransactions();
+          onClose(); // Close the form after submission
+        })
+       .catch((error) => console.error("Error editing transaction:", error));
+    } else {
+      fetch("http://127.0.0.1:8000/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTransaction),
+      })
+       .then((response) => response.json())
+       .then((data) => {
+          console.log(data);
+          refreshTransactions();
+          onClose(); // Close the form after submission
+        })
+       .catch((error) => console.error("Error creating transaction:", error));
+    }
   };
 
   return (
     <Modal show onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add Transaction</Modal.Title>
+        <Modal.Title>{isEditing? "Edit Transaction" : "Add Transaction"}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -50,6 +73,7 @@ function TransactionForm({ onClose, refreshTransactions }) {
               type="text"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
+              placeholder="Enter user ID"
             />
           </Form.Group>
           <Form.Group controlId="formProductId">
@@ -58,6 +82,7 @@ function TransactionForm({ onClose, refreshTransactions }) {
               type="text"
               value={productId}
               onChange={(e) => setProductId(e.target.value)}
+              placeholder="Enter product ID"
             />
           </Form.Group>
           <Form.Group controlId="formQuantity">
@@ -66,6 +91,7 @@ function TransactionForm({ onClose, refreshTransactions }) {
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+              placeholder="Enter quantity"
             />
           </Form.Group>
           <Form.Group controlId="formTransactionType">
@@ -74,6 +100,7 @@ function TransactionForm({ onClose, refreshTransactions }) {
               type="text"
               value={transactionType}
               onChange={(e) => setTransactionType(e.target.value)}
+              placeholder="Enter transaction type"
             />
           </Form.Group>
           <Form.Group controlId="formDate">
@@ -91,10 +118,11 @@ function TransactionForm({ onClose, refreshTransactions }) {
               step="0.01"
               value={totalPrice}
               onChange={(e) => setTotalPrice(e.target.value)}
+              placeholder="Enter total price"
             />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Add Transaction
+            {isEditing? "Save Changes" : "Add Transaction"}
           </Button>
         </Form>
       </Modal.Body>

@@ -22,13 +22,13 @@ const ProductList = ({
   };
 
   return (
-    <div>
-      <h2>Products</h2>
+    <div className="container-fluid py-4">
+      <h2 className="mb-4">Products</h2>
       <Button variant="primary" className="mb-3" onClick={onAddProductClick}>
         Add Product
       </Button>
 
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive className="mb-4">
         <thead>
           <tr>
             <th>ID</th>
@@ -37,43 +37,61 @@ const ProductList = ({
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => {
-            console.log("Rendering product:", product);
-            return(
+          {products.map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>
                 <Button
                   variant="info"
+                  size="sm"
                   onClick={() => handleViewDetails(product.id)}
                 >
                   View Details
                 </Button>
               </td>
             </tr>
-            );
-           })}
+          ))}
         </tbody>
       </Table>
 
-      <Modal show={showProductModal} onHide={handleCloseModal}>
+      <Modal
+        show={showProductModal}
+        onHide={handleCloseModal}
+        size="lg"
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Product Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedProductId &&
             products
-            .filter((product) => product.id === selectedProductId)
-            .map((product) => (
-                <div key={product.id}>
-                  <p><strong>ID:</strong> {product.id}</p>
-                  <p><strong>Name:</strong> {product.name}</p>
-                  <p><strong>SKU:</strong> {product.sku}</p>
-                  <p><strong>Description:</strong> {product.description}</p>
-                  <p><strong>Quantity:</strong> {product.quantity}</p>
-                  <p><strong>Price:</strong> {product.price}</p>
-                  <p><strong>Supplier:</strong> {product.supplier}</p>
+             .filter((product) => product.id === selectedProductId)
+             .map((product) => (
+                <div key={product.id} className="product-details">
+                  <h4>Product Information</h4>
+                  <p>
+                    <strong>ID:</strong> {product.id}
+                  </p>
+                  <p>
+                    <strong>Name:</strong> {product.name}
+                  </p>
+                  <p>
+                    <strong>SKU:</strong> {product.sku}
+                  </p>
+                  <p>
+                    <strong>Description:</strong> {product.description}
+                  </p>
+                  <p>
+                    <strong>Quantity:</strong> {product.quantity}
+                  </p>
+                  <p>
+                    <strong>Price:</strong> {product.price}
+                  </p>
+                  <p>
+                    <strong>Supplier:</strong> {product.supplier}
+                  </p>
 
                   <Button
                     variant="warning"
@@ -89,8 +107,7 @@ const ProductList = ({
                     Delete
                   </Button>
                 </div>
-              ) , null
-            )}
+              ))}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

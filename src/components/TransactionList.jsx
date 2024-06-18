@@ -1,15 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+// TransactionList.jsx
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 
-function TransactionList({ transactions, onAddTransactionClick }) {
-
+function TransactionList({
+  transactions,
+  onAddTransactionClick,
+  onEditTransactionClick,
+  onDeleteTransactionClick,
+}) {
   return (
-    <div>
-      <h2>Transactions</h2>
-      <Button variant="primary" className="mb-3" onClick={onAddTransactionClick}>Add Transaction</Button>
-      <Table striped bordered hover>
+    <div className="container-fluid py-4">
+      <h2 className="mb-4">Transactions</h2>
+      <Button variant="primary" className="mb-3" onClick={onAddTransactionClick}>
+        Add Transaction
+      </Button>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>ID</th>
@@ -21,7 +28,7 @@ function TransactionList({ transactions, onAddTransactionClick }) {
           </tr>
         </thead>
         <tbody>
-          {transactions.map(transaction => (
+          {transactions.map((transaction) => (
             <tr key={transaction.id}>
               <td>{transaction.id}</td>
               <td>{transaction.quantity}</td>
@@ -29,8 +36,19 @@ function TransactionList({ transactions, onAddTransactionClick }) {
               <td>{transaction.date}</td>
               <td>{transaction.total_price}</td>
               <td>
-                <Button variant="warning" className="mr-2">Edit</Button>
-                <Button variant="danger">Delete</Button>
+                <Button
+                  variant="success"
+                  className="mr-2"
+                  onClick={() => onEditTransactionClick(transaction)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={() => onDeleteTransactionClick(transaction.id)}
+                >
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}
