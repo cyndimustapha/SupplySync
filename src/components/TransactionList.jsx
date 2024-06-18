@@ -19,7 +19,8 @@ function TransactionList({
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>User ID</th>
+            <th>Product ID</th>
             <th>Quantity</th>
             <th>Transaction Type</th>
             <th>Date</th>
@@ -30,7 +31,8 @@ function TransactionList({
         <tbody>
           {transactions.map((transaction) => (
             <tr key={transaction.id}>
-              <td>{transaction.id}</td>
+              <td>{transaction.user_id}</td>
+              <td>{transaction.product_id}</td>
               <td>{transaction.quantity}</td>
               <td>{transaction.type}</td>
               <td>{transaction.date}</td>
