@@ -10,10 +10,15 @@ function ProductsPage() {
   const [showForm, setShowForm] = useState(false);
 
   const fetchProducts = () => {
+    // Fetch products from API
     fetch('http://127.0.0.1:8000/products')
       .then(response => response.json())
-      .then(data => setProducts(data))
+      .then(data => {
+        console.log(data);
+        setProducts(data)
+      })
       .catch(error => console.error('Error fetching products:', error));
+
   };
 
   useEffect(() => {
@@ -27,7 +32,7 @@ function ProductsPage() {
         <div style={{ width: '250px', minWidth: '250px', backgroundColor: '#f8f9fa' }}>
           <Sidebar />
         </div>
-        <main role="main" style={{ flexGrow: 1, padding: '1rem' }}>
+        <main role="main" style={{ flexGrow: 1, padding: '1rem', color: 'black' }}>
           <ProductList products={products} onAddProductClick={() => setShowForm(true)} />
           {showForm && <ProductForm onClose={() => setShowForm(false)} refreshProducts={fetchProducts} />}
         </main>

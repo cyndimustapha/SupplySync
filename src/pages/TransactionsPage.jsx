@@ -1,10 +1,29 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TransactionList from '../components/TransactionList';
+import TransactionForm from '../components/TransactionForm';
 
 function TransactionsPage() {
+  const [transactions, setTransactions] = useState([]);
+  const [showForm, setShowForm] = useState(false); // State to manage form visibility
+
+  const fetchTransactions = () => {
+    // Fetch transactions from API
+    fetch('http://127.0.0.1:8000/transactions')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched transactions:', data);
+        setTransactions(data);
+      })
+      .catch(error => console.error('Error fetching transactions:', error));
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
   const containerStyle = {
     display: 'flex',
   };
@@ -28,7 +47,8 @@ function TransactionsPage() {
           <Sidebar />
         </div>
         <main role="main" style={mainContentStyle}>
-          <TransactionList />
+          <TransactionList transactions={transactions} onAddTransactionClick={() => setShowForm(true)} />
+          {showForm && <TransactionForm onClose={() => setShowForm(false)} refreshTransactions={fetchTransactions} />}
         </main>
       </div>
     </>

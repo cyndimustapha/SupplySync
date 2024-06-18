@@ -2,6 +2,9 @@
 import { Table, Button } from 'react-bootstrap';
 
 function ProductList({ products, onAddProductClick }) {
+
+  console.log(products)
+  
   return (
     <div>
       <h2>Products</h2>

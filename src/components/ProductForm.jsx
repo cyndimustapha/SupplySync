@@ -38,7 +38,7 @@ function ProductForm({ onClose, refreshProducts }) {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formName">
-            <Form.Label>Product Name</Form.Label>
+            <Form.Label>Name</Form.Label>
             <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
           </Form.Group>
           <Form.Group controlId="formSku">
