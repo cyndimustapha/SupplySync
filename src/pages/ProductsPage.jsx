@@ -58,6 +58,12 @@ function ProductsPage() {
       .catch((error) => console.error("Error deleting product:", error));
   };
 
+  const refreshProducts = (newProduct) => {
+    console.log("Refreshing products...")
+    setProducts([...products, newProduct]); // Append the new product to the products array
+    console.log("updated products:", products);
+  };
+
   return (
     <>
       <Header />
@@ -84,7 +90,7 @@ function ProductsPage() {
           {showForm && (
             <ProductForm
               onClose={() => setShowForm(false)}
-              refreshProducts={fetchProducts}
+              refreshProducts={refreshProducts}
             />
           )}
         </main>

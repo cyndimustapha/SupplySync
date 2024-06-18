@@ -19,7 +19,7 @@ function ProductForm({ onClose, refreshProducts }) {
       return;
     }
     const newProduct = { name, sku, description, quantity, price, supplier };
-
+    console.log("newProduct")
     fetch('http://127.0.0.1:8000/products', {
       method: 'POST',
       headers: {
@@ -30,11 +30,12 @@ function ProductForm({ onClose, refreshProducts }) {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        refreshProducts(); // Re-fetch products after adding a new one
+        refreshProducts(data); // Re-fetch products after adding a new one
         onClose(); // Close the form after submission
       })
       .catch(error => console.error('Error creating product:', error));
   };
+
 
   return (
     <Modal show onHide={onClose}>

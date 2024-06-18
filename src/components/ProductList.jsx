@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-
-import React from "react";
-import { Table, Button, Modal } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Modal, Table } from "react-bootstrap";
 
 const ProductList = ({
   products,
@@ -9,25 +8,17 @@ const ProductList = ({
   onEditProduct,
   onDeleteProduct,
 }) => {
-  const [showDeleteModal, setShowDeleteModal] = React.useState(false);
-  const [selectedProductId, setSelectedProductId] = React.useState(null);
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
-  const handleEditClick = (productId) => {
-    onEditProduct(productId);
-  };
-
-  const handleDeleteClick = (productId) => {
+  const handleViewDetails = (productId) => {
     setSelectedProductId(productId);
-    setShowDeleteModal(true);
+    setShowProductModal(true);
   };
 
-  const handleConfirmDelete = () => {
-    onDeleteProduct(selectedProductId);
-    setShowDeleteModal(false);
-  };
-
-  const handleCancelDelete = () => {
-    setShowDeleteModal(false);
+  const handleCloseModal = () => {
+    setShowProductModal(false);
+    setSelectedProductId(null);
   };
 
   return (
@@ -36,60 +27,74 @@ const ProductList = ({
       <Button variant="primary" className="mb-3" onClick={onAddProductClick}>
         Add Product
       </Button>
+
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>SKU</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Supplier</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {products.map((product) => {
+            console.log("Rendering product:", product);
+            return(
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.name}</td>
-              <td>{product.sku}</td>
-              <td>{product.description}</td>
-              <td>{product.quantity}</td>
-              <td>{product.price}</td>
-              <td>{product.supplier}</td>
               <td>
                 <Button
-                  variant="warning"
-                  className="mr-2"
-                  onClick={() => handleEditClick(product.id)}
+                  variant="info"
+                  onClick={() => handleViewDetails(product.id)}
                 >
-                  Edit
-                </Button>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDeleteClick(product.id)}
-                >
-                  Delete
+                  View Details
                 </Button>
               </td>
             </tr>
-          ))}
+            );
+           })}
         </tbody>
       </Table>
 
-      <Modal show={showDeleteModal} onHide={handleCancelDelete}>
+      <Modal show={showProductModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
+          <Modal.Title>Product Details</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this product?</Modal.Body>
+        <Modal.Body>
+          {selectedProductId &&
+            products
+            .filter((product) => product.id === selectedProductId)
+            .map((product) => (
+                <div key={product.id}>
+                  <p><strong>ID:</strong> {product.id}</p>
+                  <p><strong>Name:</strong> {product.name}</p>
+                  <p><strong>SKU:</strong> {product.sku}</p>
+                  <p><strong>Description:</strong> {product.description}</p>
+                  <p><strong>Quantity:</strong> {product.quantity}</p>
+                  <p><strong>Price:</strong> {product.price}</p>
+                  <p><strong>Supplier:</strong> {product.supplier}</p>
+
+                  <Button
+                    variant="warning"
+                    className="mr-2"
+                    onClick={() => onEditProduct(product.id)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => onDeleteProduct(product.id)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              ) , null
+            )}
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancelDelete}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleConfirmDelete}>
-            Delete
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

@@ -45,11 +45,11 @@ function Dashboard() {
           <h2>Dashboard</h2>
           {lowStockProducts.length > 0 && (
             <Alert variant="warning">
-              The following products have low stock:
+              The following products are in low stock:
               <ul>
                 {lowStockProducts.map((product) => (
                   <li key={product.id}>
-                    {product.name} (Quantity: {product.quantity})
+                    {product.name}, Remaining Quantity: {product.quantity}
                   </li>
                 ))}
               </ul>
