@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 
 function ProductForm({ onClose, refreshProducts }) {
@@ -9,9 +10,14 @@ function ProductForm({ onClose, refreshProducts }) {
   const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
   const [supplier, setSupplier] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!name || !sku || !description || !quantity || !price || !supplier) {
+      setError('All fields are required');
+      return;
+    }
     const newProduct = { name, sku, description, quantity, price, supplier };
 
     fetch('http://127.0.0.1:8000/products', {
@@ -61,6 +67,7 @@ function ProductForm({ onClose, refreshProducts }) {
             <Form.Label>Supplier</Form.Label>
             <Form.Control type="text" value={supplier} onChange={(e) => setSupplier(e.target.value)} />
           </Form.Group>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <Button variant="primary" type="submit">Add Product</Button>
         </Form>
       </Modal.Body>

@@ -5,6 +5,12 @@
 #### By *Cyndi Marren Mustapha*
 
 ## Description
+Welcome to SupplySync! This application is designed to help businesses efficiently manage their inventory of products. It provides features for adding, editing, deleting, and viewing product details and transactions, as well as monitoring stock levels.
+
+Features include:
+1. Product Management: Add, edit, and delete products with details such as name, SKU, description, quantity, price, and supplier information.
+2. Inventory Tracking: Monitor real-time stock levels and receive notifications for low-stock items.
+3. User Authentication: Secure login and registration system for authorized access to the system.
 
 ## Installation
 You use git clone to be able to download the documents in the GitHub
@@ -17,6 +23,9 @@ Git
 git clone https://github.com/cyndimustapha/SupplySync.git
 
 ```
+
+### Backend Repository
+https://github.com/cyndimustapha/SupplySync-Backend.git
 
 # Live Link
 

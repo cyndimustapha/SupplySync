@@ -8,8 +8,8 @@ function LoginPage() {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
-        <Col md={6}>
+      <Row className="justify-content-md-center" style={{ minHeight: '100vh'}}>
+        <Col md={6} className="mt-auto mb-auto">
           {isLogin ? <Login /> : <Registration />}
           <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
             {isLogin ? "Don't have an account? Register here" : "Already have an account? Login here"}

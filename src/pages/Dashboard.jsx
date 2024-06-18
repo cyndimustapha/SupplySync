@@ -8,18 +8,18 @@ function Dashboard() {
   //styling
   const containerStyle = {
     display: "flex",
+    minHeight: "100vh",
   };
 
   const sidebarStyle = {
-    width: "250px", // Fixed width for the sidebar
     minWidth: "250px",
-    backgroundColor: "#f8f9fa",
   };
 
   const mainContentStyle = {
     flexGrow: 1, // Takes the remaining width
     padding: "1rem",
     fontFamily: "Times New Roman, Times, serif",
+    color : "black"
   };
 
   const [lowStockProducts, setLowStockProducts] = useState([]);
