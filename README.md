@@ -10,7 +10,7 @@ Welcome to SupplySync! This application is designed to help businesses efficient
 Features include:
 1. Product Management: Add, edit, and delete products with details such as name, SKU, description, quantity, price, and supplier information.
 2. Inventory Tracking: Monitor real-time stock levels and receive notifications for low-stock items.
-3. User Authentication: Secure login and registration system for authorized access to the system.
+3. User Registration and login: login and registration system for authorized access to the system.
 
 ## Installation
 You use git clone to be able to download the documents in the GitHub
@@ -28,7 +28,7 @@ git clone https://github.com/cyndimustapha/SupplySync.git
 https://github.com/cyndimustapha/SupplySync-Backend.git
 
 # Live Link
-
+https://drive.google.com/file/d/1rGHUUL5QVJTGWwYNrOVboU25wTUvItUJ/view?usp=sharing
 
 ## Technologies used
 React
