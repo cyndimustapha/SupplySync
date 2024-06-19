@@ -1,13 +1,8 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
+import PropTypes from "prop-types";
 
-const ProductList = ({
-  products,
-  onAddProductClick,
-  onEditProduct,
-  onDeleteProduct,
-}) => {
+const ProductList = ({ products, onAddProductClick, onEditProduct, onDeleteProduct }) => {
   const [showProductModal, setShowProductModal] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -67,31 +62,17 @@ const ProductList = ({
         <Modal.Body>
           {selectedProductId &&
             products
-             .filter((product) => product.id === selectedProductId)
-             .map((product) => (
+              .filter((product) => product.id === selectedProductId)
+              .map((product) => (
                 <div key={product.id} className="product-details">
                   <h4>Product Information</h4>
-                  <p>
-                    <strong>ID:</strong> {product.id}
-                  </p>
-                  <p>
-                    <strong>Name:</strong> {product.name}
-                  </p>
-                  <p>
-                    <strong>SKU:</strong> {product.sku}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {product.description}
-                  </p>
-                  <p>
-                    <strong>Quantity:</strong> {product.quantity}
-                  </p>
-                  <p>
-                    <strong>Price:</strong> {product.price}
-                  </p>
-                  <p>
-                    <strong>Supplier:</strong> {product.supplier}
-                  </p>
+                  <p><strong>ID:</strong> {product.id}</p>
+                  <p><strong>Name:</strong> {product.name}</p>
+                  <p><strong>SKU:</strong> {product.sku}</p>
+                  <p><strong>Description:</strong> {product.description}</p>
+                  <p><strong>Quantity:</strong> {product.quantity}</p>
+                  <p><strong>Price:</strong> {product.price}</p>
+                  <p><strong>Supplier:</strong> {product.supplier}</p>
 
                   <Button
                     variant="warning"
@@ -117,6 +98,13 @@ const ProductList = ({
       </Modal>
     </div>
   );
+};
+
+ProductList.propTypes = {
+  products: PropTypes.array.isRequired,
+  onAddProductClick: PropTypes.func.isRequired,
+  onEditProduct: PropTypes.func.isRequired,
+  onDeleteProduct: PropTypes.func.isRequired,
 };
 
 export default ProductList;

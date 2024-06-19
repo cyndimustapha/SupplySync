@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
@@ -15,15 +16,11 @@ function ProductsPage() {
   const fetchProducts = () => {
     fetch("http://127.0.0.1:8000/products")
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
-      })
+      .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
   };
 
   const handleEditProduct = (productId, updatedProductData) => {
-    console.log(`Editing product with ID: ${productId}`);
     fetch(`http://127.0.0.1:8000/products/${productId}`, {
       method: "PUT",
       headers: {
@@ -33,12 +30,8 @@ function ProductsPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Product updated successfully:", data);
-        // Update the products list with the updated product
         const updatedProducts = products.map((product) =>
-          product.id === productId
-            ? { ...product, ...updatedProductData }
-            : product
+          product.id === productId ? { ...product, ...updatedProductData } : product
         );
         setProducts(updatedProducts);
       })
@@ -46,41 +39,28 @@ function ProductsPage() {
   };
 
   const handleDeleteProduct = (productId) => {
-    console.log(`Deleting product with ID: ${productId}`);
     fetch(`http://127.0.0.1:8000/products/${productId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Product deleted successfully:", data);
+      .then(() => {
         setProducts(products.filter((product) => product.id !== productId));
       })
       .catch((error) => console.error("Error deleting product:", error));
   };
 
   const refreshProducts = (newProduct) => {
-    console.log("Refreshing products...")
-    setProducts([...products, newProduct]); // Append the new product to the products array
-    console.log("updated products:", products);
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
   return (
     <>
       <Header />
       <div style={{ display: "flex" }}>
-        <div
-          style={{
-            width: "250px",
-            minWidth: "250px",
-            backgroundColor: "#f8f9fa",
-          }}
-        >
+        <div style={{ width: "250px", minWidth: "250px", backgroundColor: "#f8f9fa" }}>
           <Sidebar />
         </div>
-        <main
-          role="main"
-          style={{ flexGrow: 1, padding: "1rem", color: "black" }}
-        >
+        <main role="main" style={{ flexGrow: 1, padding: "1rem", color: "black" }}>
           <ProductList
             products={products}
             onAddProductClick={() => setShowForm(true)}
@@ -88,10 +68,7 @@ function ProductsPage() {
             onDeleteProduct={handleDeleteProduct}
           />
           {showForm && (
-            <ProductForm
-              onClose={() => setShowForm(false)}
-              refreshProducts={refreshProducts}
-            />
+            <ProductForm onClose={() => setShowForm(false)} refreshProducts={refreshProducts} />
           )}
         </main>
       </div>

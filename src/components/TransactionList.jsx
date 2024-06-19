@@ -21,10 +21,10 @@ function TransactionList({
           <tr>
             <th>User ID</th>
             <th>Product ID</th>
-            <th>Quantity</th>
-            <th>Transaction Type</th>
             <th>Date</th>
+            <th>Quantity</th>
             <th>Total Amount</th>
+            <th>Transaction Type</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -33,10 +33,10 @@ function TransactionList({
             <tr key={transaction.id}>
               <td>{transaction.user_id}</td>
               <td>{transaction.product_id}</td>
-              <td>{transaction.quantity}</td>
-              <td>{transaction.type}</td>
               <td>{transaction.date}</td>
+              <td>{transaction.quantity}</td>
               <td>{transaction.total_price}</td>
+              <td>{transaction.type}</td>
               <td>
                 <Button
                   variant="success"

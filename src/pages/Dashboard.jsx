@@ -49,7 +49,7 @@ function Dashboard() {
               <ul>
                 {lowStockProducts.map((product) => (
                   <li key={product.id}>
-                    {product.name}, Remaining Quantity: {product.quantity}
+                    {product.sku}
                   </li>
                 ))}
               </ul>
